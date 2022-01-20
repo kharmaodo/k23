@@ -25,7 +25,6 @@ import sn.waqft.dft.security.AuthoritiesConstants;
 import sn.waqft.dft.service.UserService;
 import sn.waqft.dft.service.dto.AdminUserDTO;
 import sn.waqft.dft.service.dto.PasswordChangeDTO;
-import sn.waqft.dft.service.dto.UserDTO;
 import sn.waqft.dft.web.rest.vm.KeyAndPasswordVM;
 import sn.waqft.dft.web.rest.vm.ManagedUserVM;
 
