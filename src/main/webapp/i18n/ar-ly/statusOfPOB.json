@@ -1,0 +1,10 @@
+{
+  "k23App": {
+    "StatusOfPOB": {
+      "null": "",
+      "COLLECTION": "COLLECTION",
+      "MANUSCRIPT": "MANUSCRIPT",
+      "PURCHASABLE": "PURCHASABLE"
+    }
+  }
+}

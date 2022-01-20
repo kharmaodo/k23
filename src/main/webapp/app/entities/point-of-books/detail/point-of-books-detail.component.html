@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pointOfBooks">
+      <h2 data-cy="pointOfBooksDetailsHeading"><span jhiTranslate="k23App.pointOfBooks.detail.title">Point Of Books</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.name">Name</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.content">Content</span></dt>
+        <dd>
+          <div *ngIf="pointOfBooks.content">
+            <a (click)="openFile(pointOfBooks.content, pointOfBooks.contentContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ pointOfBooks.contentContentType }}, {{ byteSize(pointOfBooks.content) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.thumbnail">Thumbnail</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.thumbnail }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.price">Price</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'k23App.StatusOfPOB.' + pointOfBooks.status }}">{{ pointOfBooks.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.volume">Volume</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.volume }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.author">Author</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.author }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.category">Category</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'k23App.Category.' + pointOfBooks.category }}">{{ pointOfBooks.category }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="k23App.pointOfBooks.deleted">Deleted</span></dt>
+        <dd>
+          <span>{{ pointOfBooks.deleted }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/point-of-books', pointOfBooks.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

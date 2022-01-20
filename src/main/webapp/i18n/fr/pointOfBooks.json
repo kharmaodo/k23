@@ -1,0 +1,33 @@
+{
+  "k23App": {
+    "pointOfBooks": {
+      "home": {
+        "title": "PointOfBooks",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Point Of Books",
+        "createOrEditLabel": "Créer ou éditer un Point Of Books",
+        "notFound": "Aucun Point Of Books trouvé"
+      },
+      "created": "Un nouveau Point Of Books a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Point Of Books avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Point Of Books avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Point Of Books {{ id }} ?"
+      },
+      "detail": {
+        "title": "Point Of Books"
+      },
+      "id": "ID",
+      "name": "Name",
+      "content": "Content",
+      "thumbnail": "Thumbnail",
+      "price": "Price",
+      "status": "Status",
+      "volume": "Volume",
+      "author": "Author",
+      "category": "Category",
+      "createdAt": "Created At",
+      "deleted": "Deleted"
+    }
+  }
+}

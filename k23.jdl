@@ -1,0 +1,42 @@
+
+entity PointOfBooks {
+	name String required,
+    content Blob required ,
+    thumbnail String,
+    price String,
+    status StatusOfPOB,
+    volume String,
+    author String,
+    category Category,
+    createdAt Instant,
+    deleted Boolean
+}
+
+enum  StatusOfPOB {
+	 COLLECTION,
+	 MANUSCRIPT,
+     PURCHASABLE
+}
+
+enum  ImageType {
+	 JPG,
+	 JPEG,
+     PNG
+}
+
+enum Category {
+    FIQH,
+    LUGHA,
+    NAHW,
+    SIRA,
+    HADITH,
+    MANTIQ,
+    TAWHID,
+    TAFSIR
+}
+
+paginate PointOfBooks with pagination
+
+dto * with mapstruct
+
+service all with serviceClass

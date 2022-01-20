@@ -1,0 +1,7 @@
+export enum StatusOfPOB {
+  COLLECTION = 'COLLECTION',
+
+  MANUSCRIPT = 'MANUSCRIPT',
+
+  PURCHASABLE = 'PURCHASABLE',
+}
