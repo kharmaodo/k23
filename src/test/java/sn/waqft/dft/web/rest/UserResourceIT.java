@@ -2,7 +2,6 @@ package sn.waqft.dft.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -23,7 +22,6 @@ import sn.waqft.dft.domain.User;
 import sn.waqft.dft.repository.UserRepository;
 import sn.waqft.dft.security.AuthoritiesConstants;
 import sn.waqft.dft.service.dto.AdminUserDTO;
-import sn.waqft.dft.service.dto.UserDTO;
 import sn.waqft.dft.service.mapper.UserMapper;
 import sn.waqft.dft.web.rest.vm.ManagedUserVM;
 

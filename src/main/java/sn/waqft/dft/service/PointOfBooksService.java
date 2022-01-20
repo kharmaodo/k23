@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sn.waqft.dft.domain.PointOfBooks;
-import sn.waqft.dft.domain.enumeration.Category;
 import sn.waqft.dft.domain.enumeration.StatusOfPOB;
 import sn.waqft.dft.repository.PointOfBooksRepository;
 import sn.waqft.dft.service.dto.PointOfBooksDTO;

@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -234,7 +233,7 @@ public class PointOfBooksResource {
      */
     @GetMapping("/point-of-books/categories/{byCategory}")
     public ResponseEntity<List<PointOfBooksDTO>> getAllPointOfBooksByCategory(@PathVariable Category byCategory,@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
-        log.debug("REST request to get a page of PointOfBooks by category {} ", byCategory.name().toString());
+        log.debug("REST request to get a page of PointOfBooks by category {} ", byCategory);
         Page<PointOfBooksDTO> page = pointOfBooksService.findByCategory(byCategory.name().toString(),pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
