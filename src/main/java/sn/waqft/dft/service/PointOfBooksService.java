@@ -17,79 +17,96 @@ import sn.waqft.dft.service.mapper.PointOfBooksMapper;
 @Service
 public class PointOfBooksService {
 
-    private final Logger log = LoggerFactory.getLogger(PointOfBooksService.class);
+	private final Logger log = LoggerFactory.getLogger(PointOfBooksService.class);
 
-    private final PointOfBooksRepository pointOfBooksRepository;
+	private final PointOfBooksRepository pointOfBooksRepository;
 
-    private final PointOfBooksMapper pointOfBooksMapper;
+	private final PointOfBooksMapper pointOfBooksMapper;
 
-    public PointOfBooksService(PointOfBooksRepository pointOfBooksRepository, PointOfBooksMapper pointOfBooksMapper) {
-        this.pointOfBooksRepository = pointOfBooksRepository;
-        this.pointOfBooksMapper = pointOfBooksMapper;
-    }
+	public PointOfBooksService(PointOfBooksRepository pointOfBooksRepository, PointOfBooksMapper pointOfBooksMapper) {
+		this.pointOfBooksRepository = pointOfBooksRepository;
+		this.pointOfBooksMapper = pointOfBooksMapper;
+	}
 
-    /**
-     * Save a pointOfBooks.
-     *
-     * @param pointOfBooksDTO the entity to save.
-     * @return the persisted entity.
-     */
-    public PointOfBooksDTO save(PointOfBooksDTO pointOfBooksDTO) {
-        log.debug("Request to save PointOfBooks : {}", pointOfBooksDTO);
-        PointOfBooks pointOfBooks = pointOfBooksMapper.toEntity(pointOfBooksDTO);
-        pointOfBooks = pointOfBooksRepository.save(pointOfBooks);
-        return pointOfBooksMapper.toDto(pointOfBooks);
-    }
+	/**
+	 * Save a pointOfBooks.
+	 *
+	 * @param pointOfBooksDTO the entity to save.
+	 * @return the persisted entity.
+	 */
+	public PointOfBooksDTO save(PointOfBooksDTO pointOfBooksDTO) {
+		log.debug("Request to save PointOfBooks : {}", pointOfBooksDTO);
+		PointOfBooks pointOfBooks = pointOfBooksMapper.toEntity(pointOfBooksDTO);
+		pointOfBooks = pointOfBooksRepository.save(pointOfBooks);
+		return pointOfBooksMapper.toDto(pointOfBooks);
+	}
 
-    /**
-     * Partially update a pointOfBooks.
-     *
-     * @param pointOfBooksDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    public Optional<PointOfBooksDTO> partialUpdate(PointOfBooksDTO pointOfBooksDTO) {
-        log.debug("Request to partially update PointOfBooks : {}", pointOfBooksDTO);
+	/**
+	 * Partially update a pointOfBooks.
+	 *
+	 * @param pointOfBooksDTO the entity to update partially.
+	 * @return the persisted entity.
+	 */
+	public Optional<PointOfBooksDTO> partialUpdate(PointOfBooksDTO pointOfBooksDTO) {
+		log.debug("Request to partially update PointOfBooks : {}", pointOfBooksDTO);
 
-        return pointOfBooksRepository
-            .findById(pointOfBooksDTO.getId())
-            .map(existingPointOfBooks -> {
-                pointOfBooksMapper.partialUpdate(existingPointOfBooks, pointOfBooksDTO);
+		return pointOfBooksRepository.findById(pointOfBooksDTO.getId()).map(existingPointOfBooks -> {
+			pointOfBooksMapper.partialUpdate(existingPointOfBooks, pointOfBooksDTO);
 
-                return existingPointOfBooks;
-            })
-            .map(pointOfBooksRepository::save)
-            .map(pointOfBooksMapper::toDto);
-    }
+			return existingPointOfBooks;
+		}).map(pointOfBooksRepository::save).map(pointOfBooksMapper::toDto);
+	}
 
-    /**
-     * Get all the pointOfBooks.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    public Page<PointOfBooksDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all PointOfBooks");
-        return pointOfBooksRepository.findAll(pageable).map(pointOfBooksMapper::toDto);
-    }
+	/**
+	 * Get all the pointOfBooks.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	public Page<PointOfBooksDTO> findAll(Pageable pageable) {
+		log.debug("Request to get all PointOfBooks");
+		return pointOfBooksRepository
+				.findAll(pageable)
+				.map(pointOfBooksMapper::toDto);
+	}
+	
+	/**
+	 * Get all the pointOfBooks.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	public Page<PointOfBooksDTO> findByDeleted(boolean deleteable,Pageable pageable) {
+		log.debug("Request to get all PointOfBooks");
+		return pointOfBooksRepository
+				.findByDeleted(deleteable,pageable)
+				.map(pointOfBooksMapper::toDto);
+	}
+	
 
-    /**
-     * Get one pointOfBooks by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    public Optional<PointOfBooksDTO> findOne(String id) {
-        log.debug("Request to get PointOfBooks : {}", id);
-        return pointOfBooksRepository.findById(id).map(pointOfBooksMapper::toDto);
-    }
+	/**
+	 * Get one pointOfBooks by id.
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	public Optional<PointOfBooksDTO> findOne(String id) {
+		log.debug("Request to get PointOfBooks : {}", id);
+		return pointOfBooksRepository.findById(id).map(pointOfBooksMapper::toDto);
+	}
 
-    /**
-     * Delete the pointOfBooks by id.
-     *
-     * @param id the id of the entity.
-     */
-    public void delete(String id) {
-        log.debug("Request to delete PointOfBooks : {}", id);
-        pointOfBooksRepository.deleteById(id);
-    }
+	/**
+	 * Delete the pointOfBooks by id.
+	 *
+	 * @param id the id of the entity.
+	 */
+	public void delete(String id) {
+		log.debug("Request to delete PointOfBooks : {}", id);
+		PointOfBooksDTO pointOfBooksDTO= this.findOne(id).get();
+		pointOfBooksDTO.setDeleted(true);
+		PointOfBooks pointOfBooks = pointOfBooksMapper.toEntity(pointOfBooksDTO);
+		pointOfBooks = pointOfBooksRepository.save(pointOfBooks);
+		PointOfBooksDTO dto = pointOfBooksMapper.toDto(pointOfBooks);
+		log.debug("Updating to true value old : {} new value {} ", pointOfBooksDTO.getDeleted(),dto.getDeleted());
+	}
 }
