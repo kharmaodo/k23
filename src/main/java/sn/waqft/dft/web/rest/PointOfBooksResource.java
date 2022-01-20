@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import sn.waqft.dft.domain.enumeration.Category;
 import sn.waqft.dft.repository.PointOfBooksRepository;
 import sn.waqft.dft.service.PointOfBooksService;
 import sn.waqft.dft.service.dto.PointOfBooksDTO;
@@ -207,5 +209,34 @@ public class PointOfBooksResource {
         log.debug("REST request to delete PointOfBooks : {}", id);
         pointOfBooksService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+    }
+
+        /**
+     * {@code GET  /point-of-books/byPurchasable} :Get all books purchasabeles
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pointOfBooks in body.
+     */
+    @GetMapping("/point-of-books/byPurchasable")
+    public ResponseEntity<List<PointOfBooksDTO>> getAllPointOfBooksPurchasable(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get a page of PointOfBooks by category");
+        Page<PointOfBooksDTO> page = pointOfBooksService.findByPurchasable(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+
+     /**
+     * {@code GET  /point-of-books/byPurchasable} :Get all books purchasabeles
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pointOfBooks in body.
+     */
+    @GetMapping("/point-of-books/categories/{byCategory}")
+    public ResponseEntity<List<PointOfBooksDTO>> getAllPointOfBooksByCategory(@PathVariable Category byCategory,@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get a page of PointOfBooks by category {} ", byCategory.name().toString());
+        Page<PointOfBooksDTO> page = pointOfBooksService.findByCategory(byCategory.name().toString(),pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

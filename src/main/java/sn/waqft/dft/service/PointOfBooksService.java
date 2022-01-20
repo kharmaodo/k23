@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sn.waqft.dft.domain.PointOfBooks;
+import sn.waqft.dft.domain.enumeration.Category;
+import sn.waqft.dft.domain.enumeration.StatusOfPOB;
 import sn.waqft.dft.repository.PointOfBooksRepository;
 import sn.waqft.dft.service.dto.PointOfBooksDTO;
 import sn.waqft.dft.service.mapper.PointOfBooksMapper;
@@ -108,5 +110,31 @@ public class PointOfBooksService {
 		pointOfBooks = pointOfBooksRepository.save(pointOfBooks);
 		PointOfBooksDTO dto = pointOfBooksMapper.toDto(pointOfBooks);
 		log.debug("Updating to true value old : {} new value {} ", pointOfBooksDTO.getDeleted(),dto.getDeleted());
+	}
+
+		/**
+	 * Get all the pointOfBooks.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	public Page<PointOfBooksDTO> findByPurchasable(Pageable pageable) {
+		log.debug("Request to get all PointOfBooks");
+		return pointOfBooksRepository
+				.findByStatus(StatusOfPOB.PURCHASABLE.toString(),pageable)
+				.map(pointOfBooksMapper::toDto);
+	}
+
+		/**
+	 * Get all the pointOfBooks.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	public Page<PointOfBooksDTO> findByCategory(String category,Pageable pageable) {
+		log.debug("Request to get all PointOfBooks");
+		return pointOfBooksRepository
+				.findByCategory(category,pageable)
+				.map(pointOfBooksMapper::toDto);
 	}
 }
