@@ -10,13 +10,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import sn.waqft.dft.IntegrationTest;
-import sn.waqft.dft.config.Constants;
 import sn.waqft.dft.domain.User;
 import sn.waqft.dft.repository.UserRepository;
-import sn.waqft.dft.service.dto.AdminUserDTO;
 import tech.jhipster.security.RandomUtil;
 
 /**
